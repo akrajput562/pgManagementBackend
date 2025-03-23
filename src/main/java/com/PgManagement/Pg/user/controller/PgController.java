@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.PgManagement.Pg.user.entity.PgData;
+import com.PgManagement.Pg.user.entity.MstPg;
 import com.PgManagement.Pg.user.service.PgService;
 
 @RestController
@@ -20,7 +20,7 @@ public class PgController {
 	
 	    @PreAuthorize("hasAuthority('owner')")
 	    @PostMapping("/savePgData")
-	    public ResponseEntity<?> createPG(@ModelAttribute @RequestBody PgData pgdat){
+	    public ResponseEntity<?> createPG(@ModelAttribute @RequestBody MstPg pgdat){
 			
 	            return ResponseEntity.status(HttpStatus.CREATED).body(pgservice.createPG(pgdat));
 

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.PgManagement.Pg.security.JwtUtil;
 import com.PgManagement.Pg.user.dto.UserDto;
-import com.PgManagement.Pg.user.entity.User;
+import com.PgManagement.Pg.user.entity.MstUser;
 import com.PgManagement.Pg.user.service.MyUserDetailsService;
 
 @RestController
@@ -33,7 +33,7 @@ public class UserController {
 	    private MyUserDetailsService userDetailsService;
 
 	    @PostMapping("/register")
-	    public User register(@ModelAttribute @RequestBody User user){
+	    public MstUser register(@ModelAttribute @RequestBody MstUser user){
 	       return userDetailsService.createUser(user);
 	    }
 
