@@ -20,10 +20,16 @@ public class PgController {
 	
 	    @PreAuthorize("hasAuthority('owner')")
 	    @PostMapping("/savePgData")
-	    public ResponseEntity<?> createPG(@ModelAttribute @RequestBody MstPg pgdat){
+	    public ResponseEntity<?> createPG( @RequestBody MstPg pgdat){
 			
 	            return ResponseEntity.status(HttpStatus.CREATED).body(pgservice.createPG(pgdat));
 
+	    }
+	    @PreAuthorize("hasAuthority('owner')")
+	    @PostMapping("/sendEmail")
+	    public ResponseEntity<String> sendMail(){
+	    	pgservice.sendEmail();
+	        return ResponseEntity.ok("Email Sent Successfully");
 	    }
 
 }

@@ -14,7 +14,7 @@ public class MstRoom {
 	 private String room_no;
 	 private Long tenant_id;
 	 private String no_of_beds;
-	 private Long floor_id;
+//	 private Long floor_id;
 	public Long getRoom_id() {
 		return room_id;
 	}
@@ -39,11 +39,11 @@ public class MstRoom {
 	public void setNo_of_beds(String no_of_beds) {
 		this.no_of_beds = no_of_beds;
 	}
-	public Long getFloor_id() {
-		return floor_id;
-	}
-	public void setFloor_id(Long floor_id) {
-		this.floor_id = floor_id;
-	}
+//	public Long getFloor_id() {
+//		return floor_id;
+//	}
+//	public void setFloor_id(Long floor_id) {
+//		this.floor_id = floor_id;
+//	}
 	 
 }

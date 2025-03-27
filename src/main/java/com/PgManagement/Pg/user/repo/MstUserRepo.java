@@ -8,6 +8,7 @@ import com.PgManagement.Pg.user.entity.MstUser;
 
 public interface MstUserRepo extends JpaRepository<MstUser, Long>{
 	
+	
 	 Optional<MstUser> findByUsername(String name);
 
 }
