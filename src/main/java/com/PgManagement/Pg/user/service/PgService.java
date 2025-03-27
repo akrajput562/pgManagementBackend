@@ -10,5 +10,7 @@ public interface PgService {
 
 	MstPg createPG(MstPg pgdat);
 
+	void sendEmail();
+
 	
 }
