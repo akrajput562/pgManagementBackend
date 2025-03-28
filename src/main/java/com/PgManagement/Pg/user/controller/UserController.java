@@ -33,7 +33,7 @@ public class UserController {
 	    private MyUserDetailsService userDetailsService;
 
 	    @PostMapping("/register")
-	    public MstUser register(@ModelAttribute @RequestBody MstUser user){
+	    public MstUser register(@ModelAttribute  MstUser user){
 	       return userDetailsService.createUser(user);
 	    }
 
