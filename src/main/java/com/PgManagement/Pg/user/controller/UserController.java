@@ -31,16 +31,21 @@ public class UserController {
 	    private AuthenticationManager authenticationManager;
 	    @Autowired
 	    private MyUserDetailsService userDetailsService;
+	    
+	    @Autowired PgController pgController;
 
 	    @PostMapping("/register")
-	    public MstUser register(@ModelAttribute  MstUser user){
-	       return userDetailsService.createUser(user);
+	    public void register(@ModelAttribute  MstUser user){
+	    	pgController.sendMail(user.getEmail());
+	     //  return userDetailsService.createUser(user);
 	    }
 
 	    @PostMapping("/login")
 	    public String login(@ModelAttribute @RequestBody UserDto user){
 	        Authentication authentication = authenticationManager.authenticate(
 	                new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+	        
+	        
 	        SecurityContextHolder.getContext().setAuthentication(authentication);
 
 	        List<String> roles = authentication.getAuthorities().stream()

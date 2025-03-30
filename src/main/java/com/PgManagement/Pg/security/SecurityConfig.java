@@ -35,23 +35,24 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    	 http
-         .cors(cors -> cors.configurationSource(corsConfigurationSource())) // ✅ Enable CORS
-         .csrf(csrf -> csrf.disable()) // ✅ Disable CSRF for APIs
-         .authorizeHttpRequests(auth -> auth
-             .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // ✅ Allow preflight (OPTIONS)
-             .requestMatchers("/user/register", "/user/login").permitAll() // ✅ Public routes
-             .anyRequest().authenticated()
-         )
-         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+        http
+            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+            .csrf(csrf -> csrf.disable()) 
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .requestMatchers("/user/register", "/user/login","/pg/verifyOtp").permitAll() // ✅ Allow these routes
+                .anyRequest().authenticated()
+            )
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
-     return http.build();
+        return http.build();
     }
+
     
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
     	CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:8081")); // ✅ Allow React Native Expo
+        configuration.setAllowedOrigins(List.of("http://localhost:8081","exp://192.168.29.155:8081")); // ✅ Allow React Native Expo
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
         configuration.setAllowCredentials(true); // ✅ Allow cookies/auth headers

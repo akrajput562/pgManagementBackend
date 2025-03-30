@@ -10,7 +10,9 @@ public interface PgService {
 
 	MstPg createPG(MstPg pgdat);
 
-	void sendEmail();
+	void sendEmail(String email);
+
+	boolean verifyOTP(String email, String otp);
 
 	
 }
