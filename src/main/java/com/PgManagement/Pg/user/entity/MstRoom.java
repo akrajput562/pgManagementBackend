@@ -14,6 +14,9 @@ public class MstRoom {
 	 private String room_no;
 	 private Long tenant_id;
 	 private String no_of_beds;
+	 private String sharingType;
+	 private Double amount;
+	 private Double deposit;
 //	 private Long floor_id;
 	public Long getRoom_id() {
 		return room_id;
@@ -39,11 +42,24 @@ public class MstRoom {
 	public void setNo_of_beds(String no_of_beds) {
 		this.no_of_beds = no_of_beds;
 	}
-//	public Long getFloor_id() {
-//		return floor_id;
-//	}
-//	public void setFloor_id(Long floor_id) {
-//		this.floor_id = floor_id;
-//	}
+	public String getSharingType() {
+		return sharingType;
+	}
+	public void setSharingType(String sharingType) {
+		this.sharingType = sharingType;
+	}
+	public Double getAmount() {
+		return amount;
+	}
+	public void setAmount(Double amount) {
+		this.amount = amount;
+	}
+	public Double getDeposit() {
+		return deposit;
+	}
+	public void setDeposit(Double deposit) {
+		this.deposit = deposit;
+	}
+
 	 
 }

@@ -5,10 +5,12 @@ package com.PgManagement.Pg.user.dto;
 public class UserDto {
 	private String username;
     private String password;
-	public UserDto(String username, String password) {
+    private String authtoken;
+	public UserDto(String username, String password,String token ) {
 		super();
 		this.username = username;
 		this.password = password;
+		this.authtoken =token;
 	}
 	public UserDto() {
 		super();
@@ -24,6 +26,12 @@ public class UserDto {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public String getAuthtoken() {
+		return authtoken;
+	}
+	public void setAuthtoken(String authtoken) {
+		this.authtoken = authtoken;
 	}
     
 }

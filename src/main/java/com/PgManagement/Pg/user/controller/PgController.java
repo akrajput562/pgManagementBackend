@@ -25,18 +25,16 @@ public class PgController {
 	    @PreAuthorize("hasAuthority('owner')")
 	    @PostMapping("/savePgData")
 	    public ResponseEntity<?> createPG( @RequestBody MstPg pgdat){
-			
-	            return ResponseEntity.status(HttpStatus.CREATED).body(pgservice.createPG(pgdat));
-
+	    MstPg savedPg = pgservice.createPG(pgdat);
+	    return ResponseEntity.status(HttpStatus.CREATED).body(savedPg);
 	    }
-	  //d  @PreAuthorize("hasAuthority('owner')")
-	  //  @PostMapping("/sendEmail")
+
 	    public ResponseEntity<String> sendMail(String email){
 	    	pgservice.sendEmail(email);
 	        return ResponseEntity.ok("Email Sent Successfully");
 	    }
 	    
-	//    @PreAuthorize("hasAuthority('owner')")
+
 	    @PostMapping("/verifyOtp")
 	    public ResponseEntity<?> verifyOTP(@ModelAttribute  MstUser user ,String otp) {
 	        boolean isVerified = pgservice.verifyOTP(user.getEmail(),otp );
