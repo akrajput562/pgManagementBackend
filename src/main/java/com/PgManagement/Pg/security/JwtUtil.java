@@ -27,10 +27,11 @@ public class JwtUtil {
     }
 
 
-    public String generateToken(String username, List<String> roles){
+    public String generateToken(String username, List<String> roles,long userid){
         return Jwts.builder()
                 .setSubject(username)
                 .claim("roles", roles)
+                .claim("user_id", userid)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000*60*5))
                 .signWith(getSignedKey(), SignatureAlgorithm.HS256)

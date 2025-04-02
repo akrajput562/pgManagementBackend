@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.PgManagement.Pg.security.JwtUtil;
+import com.PgManagement.Pg.security.UserPrincipal;
 import com.PgManagement.Pg.user.dto.AuthTokenResponseDto;
 import com.PgManagement.Pg.user.dto.UserDto;
 import com.PgManagement.Pg.user.entity.MstUser;
@@ -55,7 +56,13 @@ public class UserController {
 	                .toList();
 
 	        UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
-	        String token = jwtUtil.generateToken(userDetails.getUsername(), roles);
+	        long userId=0;
+	        if (userDetails instanceof UserPrincipal) {
+	        	UserPrincipal customUser = (UserPrincipal) userDetails;
+	            System.out.println("User ID: " + customUser.getUser_id());
+	            userId=customUser.getUser_id();
+	        }
+	        String token = jwtUtil.generateToken(userDetails.getUsername(),roles, userId);
 	        return ResponseEntity.ok(new AuthTokenResponseDto(token));
 
 	    }
