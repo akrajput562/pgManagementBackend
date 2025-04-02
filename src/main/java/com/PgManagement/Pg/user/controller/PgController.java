@@ -16,6 +16,8 @@ import com.PgManagement.Pg.user.entity.MstUser;
 import com.PgManagement.Pg.user.service.MyUserDetailsService;
 import com.PgManagement.Pg.user.service.PgService;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 @RestController
 @RequestMapping("/pg")
 public class PgController {
@@ -24,7 +26,9 @@ public class PgController {
 	
 	    @PreAuthorize("hasAuthority('owner')")
 	    @PostMapping("/savePgData")
-	    public ResponseEntity<?> createPG( @RequestBody MstPg pgdat){
+	    public ResponseEntity<?> createPG( @RequestBody MstPg pgdat,HttpServletRequest request){
+	        String authHeader = request.getHeader("Authorization");
+	        System.out.println("Authorization Header: " + authHeader);  // Debugging
 	    MstPg savedPg = pgservice.createPG(pgdat);
 	    return ResponseEntity.status(HttpStatus.CREATED).body(savedPg);
 	    }
@@ -45,5 +49,10 @@ public class PgController {
 	        	 return ResponseEntity.ok("Otp Verification Failed");
 	        }
 	    }
-
+	    @PostMapping("/test")
+	    public ResponseEntity<String> testEndpoint(@RequestBody String message) {
+	        // Simple debugging: Just return the message that was sent in the request
+	        System.out.println("Received message: " + message);  // This will log the message on the server
+	        return ResponseEntity.status(HttpStatus.OK).body("Message received: " + message);
+	    }
 }
