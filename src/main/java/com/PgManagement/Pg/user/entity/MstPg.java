@@ -32,6 +32,9 @@ public class MstPg {
 	 private String who_can_stay;
 
 	 private String available_for;
+	 @OneToMany(cascade = CascadeType.ALL)
+		@JoinColumn(name = "fk_pg_id", referencedColumnName = "pg_id")  
+		private List<MstFloor> floors;
 	 
 	public Long getPg_id() {
 		return pg_id;
@@ -97,6 +100,24 @@ public class MstPg {
 	}
 	public void setProperty_type(String property_type) {
 		this.property_type = property_type;
+	}
+	public String getWho_can_stay() {
+		return who_can_stay;
+	}
+	public void setWho_can_stay(String who_can_stay) {
+		this.who_can_stay = who_can_stay;
+	}
+	public String getAvailable_for() {
+		return available_for;
+	}
+	public void setAvailable_for(String available_for) {
+		this.available_for = available_for;
+	}
+	public List<MstFloor> getFloors() {
+		return floors;
+	}
+	public void setFloors(List<MstFloor> floors) {
+		this.floors = floors;
 	}
 	
 }

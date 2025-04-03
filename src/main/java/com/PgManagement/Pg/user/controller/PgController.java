@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.PgManagement.Pg.user.entity.MstOtp;
@@ -38,7 +39,7 @@ public class PgController {
 	    
 
 	    @PostMapping("/verifyOtp")
-	    public ResponseEntity<?> verifyOTP(@ModelAttribute  MstUser user ,String otp) {
+	    public ResponseEntity<?> verifyOTP(@RequestBody  MstUser user ,@RequestParam String otp) {
 	        boolean isVerified = pgservice.verifyOTP(user.getEmail(),otp );
 
 	        if (isVerified) {
