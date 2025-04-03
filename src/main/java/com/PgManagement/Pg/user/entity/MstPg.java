@@ -1,5 +1,7 @@
 package com.PgManagement.Pg.user.entity;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -27,14 +29,10 @@ public class MstPg {
 	 private String state;
 	 private String property_type;
 	
-	 @OneToMany(cascade = CascadeType.ALL)
-	 @JoinColumn(name="fk_pg_id",referencedColumnName = "pg_id")
-	 private List<MstFloor> floor_id;
-	 @ElementCollection
-	 private List<String> whoCanStay;
+	 private String who_can_stay;
 
-	 @ElementCollection
-	 private List<String> availableFor;
+	 private String available_for;
+	 
 	public Long getPg_id() {
 		return pg_id;
 	}
@@ -53,12 +51,23 @@ public class MstPg {
 	public void setUser_id(Long user_id) {
 		this.user_id = user_id;
 	}
-	public List<MstFloor> getFloor_id() {
-		return floor_id;
-	}
-	public void setFloor_id(List<MstFloor> floor_id) {
-		this.floor_id = floor_id;
-	}
+	 
+	public void setWhoCanStay(List<String> who_can_stay) {
+        this.who_can_stay = String.join(",", who_can_stay);
+    }
+
+    // ✅ Convert String to List when retrieving
+    public List<String> getWhoCanStay() {
+        return who_can_stay != null ? Arrays.asList(who_can_stay.split(",")) : new ArrayList<>();
+    }
+
+    public void setAvailableFor(List<String> available_for) {
+        this.available_for = String.join(",", available_for);
+    }
+
+    public List<String> getAvailableFor() {
+        return available_for != null ? Arrays.asList(available_for.split(",")) : new ArrayList<>();
+    }
 	public String getPg_address() {
 		return pg_address;
 	}
