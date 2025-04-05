@@ -35,20 +35,21 @@ public class SecurityConfig {
     private JwtRequestFilter requestFilter;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-            .csrf(csrf -> csrf.disable()) 
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .requestMatchers("/user/register", "/user/login","/pg/verifyOtp").permitAll() // ✅ Allow these routes
-                .anyRequest().authenticated()
-            )
-           // .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-            .addFilterBefore(requestFilter, UsernamePasswordAuthenticationFilter.class);
-
-        return http.build();
-    }
+	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+	    http
+	        .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+	        .csrf(csrf -> csrf.disable()) 
+	        .authorizeHttpRequests(auth -> auth
+	            .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+	            .requestMatchers(HttpMethod.POST, "/pg/verifyOtp").permitAll()
+	            .requestMatchers("/user/register", "/user/login").permitAll() // ✅ Allow these routes
+	            .anyRequest().authenticated()
+	        )
+	      // .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+	        .addFilterBefore(requestFilter, UsernamePasswordAuthenticationFilter.class);
+	
+	    return http.build();
+	}
 
     
     @Bean

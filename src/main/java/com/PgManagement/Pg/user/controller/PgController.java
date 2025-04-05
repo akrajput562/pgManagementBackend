@@ -16,15 +16,17 @@ import com.PgManagement.Pg.user.entity.MstUser;
 import com.PgManagement.Pg.user.service.MyUserDetailsService;
 import com.PgManagement.Pg.user.service.PgService;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 @RestController
 @RequestMapping("/pg")
 public class PgController {
 	@Autowired PgService pgservice;
 	@Autowired MyUserDetailsService myUserDetailsService;
 	
-	    @PreAuthorize("hasAuthority('owner')")
+	    @PreAuthorize("hasAuthority('1')")
 	    @PostMapping("/savePgData")
-	    public ResponseEntity<?> createPG( @RequestBody MstPg pgdat){
+	    public ResponseEntity<?> createPG( @RequestBody MstPg pgdat,HttpServletRequest request){
 	    MstPg savedPg = pgservice.createPG(pgdat);
 	    return ResponseEntity.status(HttpStatus.CREATED).body(savedPg);
 	    }
@@ -45,5 +47,5 @@ public class PgController {
 	        	 return ResponseEntity.ok("Otp Verification Failed");
 	        }
 	    }
-
+	  
 }
