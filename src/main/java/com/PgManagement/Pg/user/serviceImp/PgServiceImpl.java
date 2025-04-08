@@ -1,6 +1,7 @@
 package com.PgManagement.Pg.user.serviceImp;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -13,8 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.PgManagement.Pg.user.entity.MstOtp;
 import com.PgManagement.Pg.user.entity.MstPg;
+import com.PgManagement.Pg.user.entity.VwRoomLayout;
 import com.PgManagement.Pg.user.repo.MstOtpRepo;
 import com.PgManagement.Pg.user.repo.MstPgRepo;
+import com.PgManagement.Pg.user.repo.VwRoomRepo;
 import com.PgManagement.Pg.user.service.PgService;
 
 import jakarta.mail.MessagingException;
@@ -28,7 +31,8 @@ public class PgServiceImpl implements PgService{
 
 	@Autowired MstPgRepo pgDataRepo;
 	@Autowired MstOtpRepo mstOtpRepo;
-
+	@Autowired VwRoomRepo vwRoomRepo;
+	
 	@Override
 	public MstPg createPG(MstPg pgdat) {
 		return pgDataRepo.save(pgdat);
@@ -82,4 +86,10 @@ public class PgServiceImpl implements PgService{
 	    	}
 	      
 	    }
+
+		@Override
+		public List<VwRoomLayout> getRoomLayoutsByPgAndUser(String pg_id, String user_id) {
+	        return vwRoomRepo.findByPgIdAndUserId(pg_id, user_id);
+
+		}
 	}
