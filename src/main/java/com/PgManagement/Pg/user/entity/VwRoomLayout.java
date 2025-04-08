@@ -1,12 +1,15 @@
 package com.PgManagement.Pg.user.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "roomview")
 public class VwRoomLayout {
 
+	@Id
+	private long index;
 	private String no_of_beds;
 	private String room_no;
 	private String pg_id;
