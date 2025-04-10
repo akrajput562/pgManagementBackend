@@ -1,6 +1,7 @@
 package com.PgManagement.Pg.user.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -53,7 +54,7 @@ public class PgController {
 	    }
 	    
 	    @PreAuthorize("hasAuthority('1')")
-	    @GetMapping("/getRoomLayoutDtls")
+	    @PostMapping("/getRoomLayoutDtls")
 	    public ResponseEntity<?> getRoomLayoutDtls(@RequestBody VwRoomLayout vwRoomLayout){
 	    	 List<VwRoomLayout> layouts = pgservice.getRoomLayoutsByPgAndUser(
 	    			 vwRoomLayout.getPg_id(), vwRoomLayout.getUser_id()
@@ -64,6 +65,14 @@ public class PgController {
 	                                  .body("No room layout found for this PG and user.");
 	         }
 
+	         return ResponseEntity.ok(layouts);
+	    	
+	    }
+	    
+	    @PreAuthorize("hasAuthority('1')")
+	    @PostMapping("/getPgDtlsByUserId")
+	    public ResponseEntity<?> getPgDtls(@RequestBody MstPg mstPg){
+	    	List<Map<String,Object>> layouts = pgservice.getPgDtlsByUserId(mstPg.getUser_id());
 	         return ResponseEntity.ok(layouts);
 	    	
 	    }
