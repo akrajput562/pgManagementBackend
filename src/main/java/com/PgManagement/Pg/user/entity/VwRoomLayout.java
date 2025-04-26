@@ -9,14 +9,14 @@ import jakarta.persistence.Table;
 public class VwRoomLayout {
 
 	@Id
-	private long index;
+	private long un_no;
 	private String no_of_beds;
 	private String room_no;
 	private String pg_id;
 	private String user_id;
 	private String occupy;
 	private String available_beds;
-	
+	private String floor_no;
 
 	public String getNo_of_beds() {
 		return no_of_beds;
@@ -53,6 +53,18 @@ public class VwRoomLayout {
 	}
 	public void setAvailable_beds(String available_beds) {
 		this.available_beds = available_beds;
+	}
+	public long getUn_no() {
+		return un_no;
+	}
+	public void setUn_no(long un_no) {
+		this.un_no = un_no;
+	}
+	public String getFloor_no() {
+		return floor_no;
+	}
+	public void setFloor_no(String floor_no) {
+		this.floor_no = floor_no;
 	}
 	
 	

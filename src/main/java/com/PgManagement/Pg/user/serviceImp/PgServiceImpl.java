@@ -2,6 +2,7 @@ package com.PgManagement.Pg.user.serviceImp;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -91,5 +92,9 @@ public class PgServiceImpl implements PgService{
 		public List<VwRoomLayout> getRoomLayoutsByPgAndUser(String pg_id, String user_id) {
 	        return vwRoomRepo.findByPgIdAndUserId(pg_id, user_id);
 
+		}
+		@Override
+		public List<Map<String,Object>> getPgDtlsByUserId(long user_id) {
+			 return pgDataRepo.getPgDtlsByUserId(user_id);
 		}
 	}

@@ -20,9 +20,9 @@ public class MstPg {
 
 	 @Id
 	 @GeneratedValue(strategy = GenerationType.IDENTITY)
-	 private Long pg_id;
+	 private long pg_id;
 	 private String pg_name;
-	 private Long user_id;
+	 private long user_id;
 	 private String pg_address;
 	 private String pin_code;
 	 private String city;
