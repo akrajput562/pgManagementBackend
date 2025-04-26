@@ -13,6 +13,8 @@ public class MstTenant {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long tenant_id;
 	private String room_id;
+	private String owner_id;
+	private String property_id;
 	private String status;
 	public Long getTenant_id() {
 		return tenant_id;
@@ -31,6 +33,18 @@ public class MstTenant {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public String getOwner_id() {
+		return owner_id;
+	}
+	public void setOwner_id(String owner_id) {
+		this.owner_id = owner_id;
+	}
+	public String getProperty_id() {
+		return property_id;
+	}
+	public void setProperty_id(String property_id) {
+		this.property_id = property_id;
 	}
 	
 }
