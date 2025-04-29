@@ -17,8 +17,11 @@ public interface MstPgRepo extends JpaRepository<MstPg, Long>{
 
 	@Query(value = "select case when\r\n"
 			+ "count(*)>0 then 'Y' else 'N' end as flag \r\n"
-			+ "from Mst_Pg where pg_id='3' ",nativeQuery = true)
+			+ "from Mst_Pg where pgOkCode= ?1 ",nativeQuery = true)
 	String getPgCodeByPgId(String pgCode);
+
+	@Query(value="select * from Mst_Pg where pgOkCode=?1",nativeQuery =true)
+	MstPg getPgDetailsByCode(String pgCode);
 
 	
 }
