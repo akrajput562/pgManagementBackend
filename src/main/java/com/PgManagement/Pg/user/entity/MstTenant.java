@@ -22,11 +22,12 @@ public class MstTenant {
 	private String Mob;
 	private String fatherName;
 	private String fatherMob;
-	
+	private long roleId = 2L;
 	@Transient private MultipartFile adharCard;
 	@Transient private MultipartFile companyId;
 	private String adharCardFolder;
 	private String companyIdFolder;
+	private String email;
 //	private String room_id;
 //	private String owner_id;
 	private String property_id;
@@ -115,5 +116,18 @@ public class MstTenant {
 	public void setCompanyIdFolder(String companyIdFolder) {
 		this.companyIdFolder = companyIdFolder;
 	}
+	public long getRoleId() {
+		return roleId;
+	}
+	public void setRoleId(long roleId) {
+		this.roleId = roleId;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
 	
 }

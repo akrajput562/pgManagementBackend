@@ -76,5 +76,13 @@ public class PgController {
 	         return ResponseEntity.ok(layouts);
 	    	
 	    }
+	    
+	    @PreAuthorize("hasAuthority('1')")
+	    @PostMapping("/getRentNotification")
+	    public ResponseEntity<?> getRentNotification(@RequestBody MstPg mstPg){
+	    	List<Map<String,Object>> notification = pgservice.getRentNotification(mstPg.getPgCode());
+	         return ResponseEntity.ok(notification);
+	    	
+	    }
 	  
 }

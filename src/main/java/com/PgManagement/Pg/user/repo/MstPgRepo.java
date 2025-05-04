@@ -2,12 +2,14 @@ package com.PgManagement.Pg.user.repo;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.PgManagement.Pg.user.entity.MstPg;
+import com.PgManagement.Pg.user.entity.MstUser;
 import com.PgManagement.Pg.user.entity.VwRoomLayout;
 @Repository
 public interface MstPgRepo extends JpaRepository<MstPg, Long>{

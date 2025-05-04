@@ -5,15 +5,17 @@ import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 import com.PgManagement.Pg.user.dto.VAlidationPgCode;
 import com.PgManagement.Pg.user.entity.MstTenant;
+import com.PgManagement.Pg.user.entity.RentInfo;
 import com.PgManagement.Pg.user.service.TenantsService;
+import org.springframework.http.MediaType;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
@@ -37,8 +39,18 @@ public class TenantsController {
 		return ResponseEntity.status(HttpStatus.OK)
 				.body(uploadImage);
 	}
+	@GetMapping("/fileSystem/{fileName}")
+	public ResponseEntity<?> downloadImageFromFileSystem(@PathVariable long fileName) throws IOException {
+	    byte[] imageData = tenantsService.downloadImageFromFileSystem(fileName);
+	    return ResponseEntity.status(HttpStatus.OK)
+	            .contentType(MediaType.valueOf("image/png"))
+	            .body(imageData);
+	}
 
-
-
-
+	@PostMapping("/saveRent")
+	public ResponseEntity<?> saveRent(@RequestBody RentInfo bo) throws IOException {
+		String uploadImage = tenantsService.saveRent(bo);
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(uploadImage);
+	}
 }

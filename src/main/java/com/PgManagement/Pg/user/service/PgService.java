@@ -20,5 +20,7 @@ public interface PgService {
 
 	List<Map<String,Object>> getPgDtlsByUserId(long user_id);
 
+	List<Map<String, Object>> getRentNotification(String pgCode);
+
 	
 }

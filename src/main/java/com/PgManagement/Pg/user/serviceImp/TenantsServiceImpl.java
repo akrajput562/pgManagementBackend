@@ -2,16 +2,17 @@ package com.PgManagement.Pg.user.serviceImp;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartFile;
-
 import com.PgManagement.Pg.user.dto.VAlidationPgCode;
 import com.PgManagement.Pg.user.entity.MstTenant;
+import com.PgManagement.Pg.user.entity.RentInfo;
 import com.PgManagement.Pg.user.repo.MstPgRepo;
+import com.PgManagement.Pg.user.repo.RentInfoRepo;
 import com.PgManagement.Pg.user.repo.TenantRepo;
 import com.PgManagement.Pg.user.service.TenantsService;
 import com.PgManagement.Pg.util.CommonService;
@@ -21,6 +22,7 @@ public class TenantsServiceImpl implements TenantsService{
 @Autowired MstPgRepo mstPgRepo;
 @Autowired TenantRepo tenantRepo;
 @Autowired CommonService commonService;
+@Autowired RentInfoRepo rentInfoRepo;
 
 	
 	@Override
@@ -49,6 +51,19 @@ public class TenantsServiceImpl implements TenantsService{
 	        return null;
 	    }
 	
+	@Override
+	public byte[] downloadImageFromFileSystem(long fileName) throws IOException {
+        Optional<MstTenant> fileData = tenantRepo.findById(fileName);
+        String filePath=fileData.get().getAdharCardFolder();
+        byte[] images = commonService.downloadImageFromFileSystem(filePath);
 
+       return images;
+    }
+
+	@Override
+	public String saveRent(RentInfo bo) {
+		rentInfoRepo.save(bo);
+		return null;
+	}
 
 }

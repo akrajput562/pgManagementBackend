@@ -18,6 +18,7 @@ import com.PgManagement.Pg.user.entity.MstPg;
 import com.PgManagement.Pg.user.entity.VwRoomLayout;
 import com.PgManagement.Pg.user.repo.MstOtpRepo;
 import com.PgManagement.Pg.user.repo.MstPgRepo;
+import com.PgManagement.Pg.user.repo.RentInfoRepo;
 import com.PgManagement.Pg.user.repo.VwRoomRepo;
 import com.PgManagement.Pg.user.service.PgService;
 
@@ -33,6 +34,7 @@ public class PgServiceImpl implements PgService{
 	@Autowired MstPgRepo pgDataRepo;
 	@Autowired MstOtpRepo mstOtpRepo;
 	@Autowired VwRoomRepo vwRoomRepo;
+	@Autowired RentInfoRepo rentInfoRepo;
 	
 	@Override
 	public MstPg createPG(MstPg pgdat) {
@@ -96,5 +98,11 @@ public class PgServiceImpl implements PgService{
 		@Override
 		public List<Map<String,Object>> getPgDtlsByUserId(long user_id) {
 			 return pgDataRepo.getPgDtlsByUserId(user_id);
+		}
+
+		@Override
+		public List<Map<String, Object>> getRentNotification(String pgCode) {
+			
+			return rentInfoRepo.getRentNotification(pgCode);
 		}
 	}

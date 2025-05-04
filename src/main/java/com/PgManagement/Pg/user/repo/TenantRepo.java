@@ -5,7 +5,9 @@ import org.springframework.stereotype.Repository;
 
 import com.PgManagement.Pg.user.entity.MstTenant;
 
+
 @Repository
 public interface TenantRepo extends JpaRepository<MstTenant, Long>{
+
 
 }

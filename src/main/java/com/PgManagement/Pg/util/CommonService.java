@@ -2,6 +2,7 @@ package com.PgManagement.Pg.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -34,6 +35,16 @@ public class CommonService {
 			
 	        
 			return filePath;
+		 
+	 }
+	 
+	 public byte[] downloadImageFromFileSystem(String filePath) throws IOException {
+			 byte[] images=new byte[0];
+		 if(filePath!=null && filePath!="") {
+			  images = Files.readAllBytes(new File(filePath).toPath());
+			 
+		 }
+		return images;
 		 
 	 }
 }

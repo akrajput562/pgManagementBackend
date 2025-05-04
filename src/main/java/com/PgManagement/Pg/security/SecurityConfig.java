@@ -43,6 +43,7 @@ public class SecurityConfig {
 	            .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 	            .requestMatchers(HttpMethod.POST, "/pg/verifyOtp").permitAll()
 	            .requestMatchers("/user/register", "/user/login").permitAll() // ✅ Allow these routes
+	            .requestMatchers("/tenants/**").permitAll()
 	            .anyRequest().authenticated()
 	        )
 	      // .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
