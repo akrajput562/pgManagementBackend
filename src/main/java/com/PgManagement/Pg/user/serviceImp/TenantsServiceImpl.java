@@ -6,13 +6,22 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.PgManagement.Pg.user.dto.VAlidationPgCode;
+import com.PgManagement.Pg.user.entity.MstPg;
 import com.PgManagement.Pg.user.entity.MstTenant;
+
 import com.PgManagement.Pg.user.entity.RentInfo;
 import com.PgManagement.Pg.user.repo.MstPgRepo;
 import com.PgManagement.Pg.user.repo.RentInfoRepo;
+import com.PgManagement.Pg.user.entity.MstTenantRequest;
+import com.PgManagement.Pg.user.repo.MstPgRepo;
+import com.PgManagement.Pg.user.repo.MstTenantRequestRepo;
 import com.PgManagement.Pg.user.repo.TenantRepo;
 import com.PgManagement.Pg.user.service.TenantsService;
 import com.PgManagement.Pg.util.CommonService;
@@ -24,17 +33,22 @@ public class TenantsServiceImpl implements TenantsService{
 @Autowired CommonService commonService;
 @Autowired RentInfoRepo rentInfoRepo;
 
+@Autowired MstTenantRequestRepo mstTenantReqRepo;
 	
 	@Override
-	public Boolean isVAlidationPgCode(VAlidationPgCode code) {
-		String flag=mstPgRepo.getPgCodeByPgId(code.getPgCode());
-		if(flag.equals("Y"))return true;
-		return false;
-		
+	public  Map<String, Object> isVAlidationPgCode(VAlidationPgCode code) {
+		 Map<String, Object> response = new HashMap<>();
+		 String flag=mstPgRepo.getPgCodeByPgId(code.getPgCode());
+		  response.put("isValid", flag);
+		  if ("Y".equalsIgnoreCase(flag)) {
+		        MstPg details = mstPgRepo.getPgDetailsByCode(code.getPgCode());
+		        response.put("pgDetails", details);  // Directly return entity
+		    }
+		  return response;
 	}
 	
 	@Override
-	 public String uploadImageToFileSystem(MstTenant bo) throws IOException {
+	 public String uploadImageToFileSystem(MstTenantRequest bo) throws IOException {
 		String adharFolder="";
 		String companyFolder="";
 		if(bo.getAdharCard().getOriginalFilename()!=null || bo.getCompanyId().getOriginalFilename()!=null) {
@@ -45,7 +59,7 @@ public class TenantsServiceImpl implements TenantsService{
 		}
 			bo.setAdharCardFolder(adharFolder);
 	        bo.setCompanyIdFolder(companyFolder);
-	        tenantRepo.save(bo);
+	        mstTenantReqRepo.save(bo);
 	        
 	       
 	        return null;

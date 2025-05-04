@@ -33,6 +33,7 @@ public class MstPg {
 	 private String who_can_stay;
 
 	 private String available_for;
+	 private String pgOkCode;
 	 @OneToMany(cascade = CascadeType.ALL)
 		@JoinColumn(name = "fk_pg_id", referencedColumnName = "pg_id")  
 		private List<MstFloor> floors;
@@ -126,5 +127,12 @@ public class MstPg {
 	public void setPgCode(String pgCode) {
 		this.pgCode = pgCode;
 	}
+	public String getPgOkCode() {
+		return pgOkCode;
+	}
+	public void setPgOkCode(String pgOkCode) {
+		this.pgOkCode = pgOkCode;
+	}
+
 	
 }
