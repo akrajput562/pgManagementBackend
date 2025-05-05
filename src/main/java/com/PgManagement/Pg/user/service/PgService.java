@@ -25,5 +25,7 @@ public interface PgService {
 
 	RentInfo conformationOfRent(RentInfo bo);
 
+	MstPg getPgDetailsWithFloorsAndRooms(Long pgId);
+
 	
 }

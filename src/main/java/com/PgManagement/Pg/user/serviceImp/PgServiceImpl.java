@@ -120,5 +120,10 @@ public class PgServiceImpl implements PgService{
 
 		    return rentInfoRepo.save(rentData); 
 		}
+		
+		 @Override
+		    public MstPg getPgDetailsWithFloorsAndRooms(Long pgId) {
+		        return pgDataRepo.findPgWithFloorsAndRoomsById(pgId).orElse(null);
+		    }
 
 	}

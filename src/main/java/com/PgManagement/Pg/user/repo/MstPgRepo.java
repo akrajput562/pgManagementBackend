@@ -25,5 +25,11 @@ public interface MstPgRepo extends JpaRepository<MstPg, Long>{
 	@Query(value="select * from Mst_Pg where pgOkCode=?1",nativeQuery =true)
 	MstPg getPgDetailsByCode(String pgCode);
 
-	
+	@Query("""
+		    FROM MstPg p
+			JOIN p.floors f
+			JOIN f.room r
+			WHERE p.pg_id = :pgId
+		""")
+		Optional<MstPg> findPgWithFloorsAndRoomsById(Long pgId);
 }

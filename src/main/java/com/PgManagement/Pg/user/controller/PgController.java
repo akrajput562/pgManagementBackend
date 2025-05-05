@@ -93,5 +93,11 @@ public class PgController {
 	         return ResponseEntity.ok(returnData);
 	    	
 	    }
+	    
+	    @GetMapping("/pgDataUpdate")
+	    public ResponseEntity<MstPg> getPgDetails() {
+	        MstPg pg = pgservice.getPgDetailsWithFloorsAndRooms(1l);
+	        return ResponseEntity.ok(pg);
+	    }
 	  
 }
