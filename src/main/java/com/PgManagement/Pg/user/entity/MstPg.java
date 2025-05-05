@@ -28,7 +28,6 @@ public class MstPg {
 	 private String city;
 	 private String state;
 	 private String property_type;
-	 private String pgCode;
 	
 	 private String who_can_stay;
 
@@ -120,12 +119,6 @@ public class MstPg {
 	}
 	public void setFloors(List<MstFloor> floors) {
 		this.floors = floors;
-	}
-	public String getPgCode() {
-		return pgCode;
-	}
-	public void setPgCode(String pgCode) {
-		this.pgCode = pgCode;
 	}
 	public String getPgOkCode() {
 		return pgOkCode;

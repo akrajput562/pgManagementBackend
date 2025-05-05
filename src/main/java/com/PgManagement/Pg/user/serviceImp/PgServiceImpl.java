@@ -13,8 +13,10 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.PgManagement.Pg.exception.RentNotFoundException;
 import com.PgManagement.Pg.user.entity.MstOtp;
 import com.PgManagement.Pg.user.entity.MstPg;
+import com.PgManagement.Pg.user.entity.RentInfo;
 import com.PgManagement.Pg.user.entity.VwRoomLayout;
 import com.PgManagement.Pg.user.repo.MstOtpRepo;
 import com.PgManagement.Pg.user.repo.MstPgRepo;
@@ -105,4 +107,18 @@ public class PgServiceImpl implements PgService{
 			
 			return rentInfoRepo.getRentNotification(pgCode);
 		}
+
+		@Override
+		public RentInfo conformationOfRent(RentInfo bo) {
+		    RentInfo rentData = rentInfoRepo.findById(bo.getRentId())
+		            .orElseThrow(() -> new RentNotFoundException(bo.getRentId()));
+
+		    if (bo.getPaymentConf() != null && !bo.getPaymentConf().isBlank()) {
+		        rentData.setPaymentConf(bo.getPaymentConf());
+		        rentInfoRepo.save(rentData);
+		    }
+
+		    return rentInfoRepo.save(rentData); 
+		}
+
 	}

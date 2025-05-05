@@ -1,6 +1,7 @@
 package com.PgManagement.Pg.user.controller;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.PgManagement.Pg.user.dto.VAlidationPgCode;
 import com.PgManagement.Pg.user.entity.MstTenant;
@@ -54,9 +56,9 @@ public class TenantsController {
 	}
 
 	@PostMapping("/saveRent")
-	public ResponseEntity<?> saveRent(@RequestBody RentInfo bo) throws IOException {
-		String uploadImage = tenantsService.saveRent(bo);
-		return ResponseEntity.status(HttpStatus.OK)
-				.body(uploadImage);
+	public ResponseEntity<?> saveRent(@RequestBody @ModelAttribute RentInfo bo) throws IOException {
+		bo.setCrtDate(new Date());
+		RentInfo returnData = tenantsService.saveRent(bo);
+		return ResponseEntity.ok(returnData);
 	}
 }

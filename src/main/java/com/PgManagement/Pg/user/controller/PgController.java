@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.PgManagement.Pg.user.entity.MstPg;
 import com.PgManagement.Pg.user.entity.MstUser;
+import com.PgManagement.Pg.user.entity.RentInfo;
 import com.PgManagement.Pg.user.entity.VwRoomLayout;
 import com.PgManagement.Pg.user.service.MyUserDetailsService;
 import com.PgManagement.Pg.user.service.PgService;
@@ -80,8 +81,16 @@ public class PgController {
 	    @PreAuthorize("hasAuthority('1')")
 	    @PostMapping("/getRentNotification")
 	    public ResponseEntity<?> getRentNotification(@RequestBody MstPg mstPg){
-	    	List<Map<String,Object>> notification = pgservice.getRentNotification(mstPg.getPgCode());
+	    	List<Map<String,Object>> notification = pgservice.getRentNotification(mstPg.getPgOkCode());
 	         return ResponseEntity.ok(notification);
+	    	
+	    }
+	    
+	    @PreAuthorize("hasAuthority('1')")
+	    @PostMapping("/conformationOfRent")
+	    public ResponseEntity<?> conformationOfRent(@RequestBody RentInfo bo){
+	    	RentInfo returnData = pgservice.conformationOfRent(bo);
+	         return ResponseEntity.ok(returnData);
 	    	
 	    }
 	  

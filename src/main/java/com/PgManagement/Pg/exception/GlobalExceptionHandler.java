@@ -25,5 +25,10 @@ public class GlobalExceptionHandler {
         );
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exceptionResponseDTO);
     }
+    
+    @ExceptionHandler(RentNotFoundException.class)
+    public ResponseEntity<String> handleRentNotFound(RentNotFoundException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
 
 }

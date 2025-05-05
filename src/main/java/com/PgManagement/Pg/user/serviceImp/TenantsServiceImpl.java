@@ -75,9 +75,8 @@ public class TenantsServiceImpl implements TenantsService{
     }
 
 	@Override
-	public String saveRent(RentInfo bo) {
-		rentInfoRepo.save(bo);
-		return null;
+	public RentInfo saveRent(RentInfo bo) {
+		return rentInfoRepo.save(bo);
 	}
 
 }

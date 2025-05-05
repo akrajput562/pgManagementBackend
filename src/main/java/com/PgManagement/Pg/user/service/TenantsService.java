@@ -18,6 +18,6 @@ public interface TenantsService {
 
 	byte[] downloadImageFromFileSystem(long fileName) throws IOException;
 
-	String saveRent(RentInfo bo);
+	RentInfo saveRent(RentInfo bo);
 
 }
