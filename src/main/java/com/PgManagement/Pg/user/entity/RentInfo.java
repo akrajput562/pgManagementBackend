@@ -2,11 +2,14 @@ package com.PgManagement.Pg.user.entity;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 @Entity
 @Table(name = "Rent_Info")
 public class RentInfo {
@@ -20,6 +23,8 @@ public class RentInfo {
 	private String paymentMode;
 	private String utrNumber;
 	private String paymentConf;
+	@Transient private MultipartFile paymentPhoto;
+	private String paymentPath;
 	public long getRentId() {
 		return rentId;
 	}
@@ -67,6 +72,18 @@ public class RentInfo {
 	}
 	public void setPaymentConf(String paymentConf) {
 		this.paymentConf = paymentConf;
+	}
+	public MultipartFile getPaymentPhoto() {
+		return paymentPhoto;
+	}
+	public void setPaymentPhoto(MultipartFile paymentPhoto) {
+		this.paymentPhoto = paymentPhoto;
+	}
+	public String getPaymentPath() {
+		return paymentPath;
+	}
+	public void setPaymentPath(String paymentPath) {
+		this.paymentPath = paymentPath;
 	}
 	
 

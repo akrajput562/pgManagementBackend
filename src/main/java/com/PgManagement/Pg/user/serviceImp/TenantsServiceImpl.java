@@ -76,6 +76,16 @@ public class TenantsServiceImpl implements TenantsService{
 
 	@Override
 	public RentInfo saveRent(RentInfo bo) {
+		String paymentPath="";
+		if(bo.getPaymentPhoto()!=null) {
+			 try {
+				paymentPath = commonService.uploadImage(bo.getPaymentPhoto());
+				bo.setPaymentPath(paymentPath);
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+			}
+		}
 		return rentInfoRepo.save(bo);
 	}
 
