@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,8 +45,8 @@ public class TenantsController {
 	@PostMapping("/registerTenant")
 	public ResponseEntity<?> uploadImageToFIleSystem(@ModelAttribute @RequestBody MstTenantRequest bo) throws IOException {
 		String uploadImage = tenantsService.uploadImageToFileSystem(bo);
-		return ResponseEntity.status(HttpStatus.OK)
-				.body(uploadImage);
+		return ResponseEntity.status(HttpStatus.OK).body(Map.of("reqId", uploadImage));
+	
 	}
 	@GetMapping("/fileSystem/{fileName}")
 	public ResponseEntity<?> downloadImageFromFileSystem(@PathVariable long fileName) throws IOException {
@@ -60,5 +61,11 @@ public class TenantsController {
 		bo.setCrtDate(new Date());
 		RentInfo returnData = tenantsService.saveRent(bo);
 		return ResponseEntity.ok(returnData);
+	}
+	
+	@PutMapping("/termUpdation/{reqId}")
+	public ResponseEntity<?> updateAgreementInfo(@PathVariable Long reqId, @ModelAttribute  MstTenantRequest agreementData) {
+		String updateAgreementInfo = tenantsService.updateAgreementInfo(reqId,agreementData);
+	    return ResponseEntity.ok(updateAgreementInfo);
 	}
 }

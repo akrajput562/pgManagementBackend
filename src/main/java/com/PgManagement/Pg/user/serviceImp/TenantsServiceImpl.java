@@ -59,10 +59,8 @@ public class TenantsServiceImpl implements TenantsService{
 		}
 			bo.setAdharCardFolder(adharFolder);
 	        bo.setCompanyIdFolder(companyFolder);
-	        mstTenantReqRepo.save(bo);
-	        
-	       
-	        return null;
+	        MstTenantRequest save = mstTenantReqRepo.save(bo);
+	        return save.getReqId().toString();
 	    }
 	
 	@Override
@@ -77,6 +75,24 @@ public class TenantsServiceImpl implements TenantsService{
 	@Override
 	public RentInfo saveRent(RentInfo bo) {
 		return rentInfoRepo.save(bo);
+	}
+
+	@Override
+	public String updateAgreementInfo(Long reqId, MstTenantRequest agreementData) {
+		MstTenantRequest existing = mstTenantReqRepo.findById(reqId)
+		        .orElseThrow(() -> new RuntimeException("Request not found"));
+
+		    existing.setMonthlyRent(agreementData.getMonthlyRent());
+		    existing.setSecurityDeposit(agreementData.getSecurityDeposit());
+		    existing.setMaintenance(agreementData.getMaintenance());
+		    existing.setAgreementStartDate(agreementData.getAgreementStartDate());
+		    existing.setRentCycle(agreementData.getRentCycle());
+		    existing.setCycleStartDate(agreementData.getCycleStartDate());
+		    existing.setAgreedToTerms(agreementData.getAgreedToTerms());
+
+		    mstTenantReqRepo.save(existing);
+		    return "Agreement info updated successfully";
+	
 	}
 
 }

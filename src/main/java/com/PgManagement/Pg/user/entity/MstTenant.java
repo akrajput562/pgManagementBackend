@@ -28,8 +28,8 @@ public class MstTenant {
 	private String adharCardFolder;
 	private String companyIdFolder;
 	private String email;
-//	private String room_id;
-//	private String owner_id;
+	private String room_id;
+	private String owner_id;
 	private String property_id;
 	private String status;
 	public Long getTenant_id() {

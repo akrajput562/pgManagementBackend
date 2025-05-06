@@ -56,7 +56,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
     	CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:8081","exp://192.168.29.155:8081")); // ✅ Allow React Native Expo
+        configuration.setAllowedOrigins(List.of("http://localhost:8081","exp://192.168.29.66:8081")); // ✅ Allow React Native Expo
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
         configuration.setAllowCredentials(true); // ✅ Allow cookies/auth headers
