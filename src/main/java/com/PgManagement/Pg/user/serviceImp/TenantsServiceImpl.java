@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.PgManagement.Pg.user.dto.CheckExistingTenant;
 import com.PgManagement.Pg.user.dto.VAlidationPgCode;
 import com.PgManagement.Pg.user.entity.MstPg;
 import com.PgManagement.Pg.user.entity.MstTenant;
@@ -94,5 +96,15 @@ public class TenantsServiceImpl implements TenantsService{
 		    return "Agreement info updated successfully";
 	
 	}
+	
+	@Override
+		public String checkExistingUser(CheckExistingTenant tenantDto) {
+		String checkExistingUserOrNot="N";
+		if(tenantDto.getEmail()!=null && !tenantDto.getEmail().equals("")
+				&& tenantDto.getPgOkCode()!=null && !tenantDto.getPgOkCode().equals("")) {
+			 checkExistingUserOrNot = mstTenantReqRepo.checkExistingUserOrNot(tenantDto.getPgOkCode(),tenantDto.getEmail());
+		}
+			return checkExistingUserOrNot;
+		}
 
 }

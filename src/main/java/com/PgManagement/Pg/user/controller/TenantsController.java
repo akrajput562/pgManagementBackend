@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.PgManagement.Pg.user.dto.CheckExistingTenant;
 import com.PgManagement.Pg.user.dto.VAlidationPgCode;
 import com.PgManagement.Pg.user.entity.MstTenant;
 import com.PgManagement.Pg.user.entity.RentInfo;
@@ -67,5 +70,11 @@ public class TenantsController {
 	public ResponseEntity<?> updateAgreementInfo(@PathVariable Long reqId, @ModelAttribute  MstTenantRequest agreementData) {
 		String updateAgreementInfo = tenantsService.updateAgreementInfo(reqId,agreementData);
 	    return ResponseEntity.ok(updateAgreementInfo);
+	}
+	
+	@PostMapping("/checkExistingUser")
+	public ResponseEntity<?> checkExistingUser(@ModelAttribute @RequestBody CheckExistingTenant checkExisistingTenantDto) {
+		String isExisintUser = tenantsService.checkExistingUser(checkExisistingTenantDto);
+	    return ResponseEntity.ok(isExisintUser);
 	}
 }
