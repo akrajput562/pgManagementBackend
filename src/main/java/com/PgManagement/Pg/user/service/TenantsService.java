@@ -20,4 +20,6 @@ public interface TenantsService {
 
 	RentInfo saveRent(RentInfo bo);
 
+	String updateAgreementInfo(Long reqId, MstTenantRequest agreementData);
+
 }

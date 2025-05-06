@@ -31,6 +31,13 @@ public class MstTenantRequest {
 	private String status;
 	private String approval_status="P";
 	private String email;
+	private Double monthlyRent;
+	private Double securityDeposit;
+	private Double maintenance;
+	private String agreementStartDate;
+	private String rentCycle;
+	private String cycleStartDate;
+	private Boolean agreedToTerms;
 	public Long getReqId() {
 		return reqId;
 	}
@@ -115,6 +122,48 @@ public class MstTenantRequest {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public Double getMonthlyRent() {
+		return monthlyRent;
+	}
+	public void setMonthlyRent(Double monthlyRent) {
+		this.monthlyRent = monthlyRent;
+	}
+	public Double getSecurityDeposit() {
+		return securityDeposit;
+	}
+	public void setSecurityDeposit(Double securityDeposit) {
+		this.securityDeposit = securityDeposit;
+	}
+	public Double getMaintenance() {
+		return maintenance;
+	}
+	public void setMaintenance(Double maintenance) {
+		this.maintenance = maintenance;
+	}
+	public String getAgreementStartDate() {
+		return agreementStartDate;
+	}
+	public void setAgreementStartDate(String agreementStartDate) {
+		this.agreementStartDate = agreementStartDate;
+	}
+	public String getRentCycle() {
+		return rentCycle;
+	}
+	public void setRentCycle(String rentCycle) {
+		this.rentCycle = rentCycle;
+	}
+	public String getCycleStartDate() {
+		return cycleStartDate;
+	}
+	public void setCycleStartDate(String cycleStartDate) {
+		this.cycleStartDate = cycleStartDate;
+	}
+	public Boolean getAgreedToTerms() {
+		return agreedToTerms;
+	}
+	public void setAgreedToTerms(Boolean agreedToTerms) {
+		this.agreedToTerms = agreedToTerms;
 	}
 
 }
